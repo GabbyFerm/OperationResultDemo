@@ -1,10 +1,5 @@
 using Application;
-using Application.Interfaces;
 using Infrastructure;
-using Infrastructure.Database;
-using Infrastructure.Repositories;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace API
 {
