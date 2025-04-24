@@ -5,7 +5,7 @@ using AutoMapper;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Books.Queries
+namespace Application.Books.Queries.GetBookById
 {
     public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, OperationResult<BookDto>>
     {
@@ -20,6 +20,10 @@ namespace Application.Books.Queries
 
         public async Task<OperationResult<BookDto>> Handle(GetBookByIdQuery request, CancellationToken cancellationToken)
         {
+            //// Simulate a crash
+            //throw new Exception("Something went wrong while retrieving the book!");
+
+
             var result = await _repository.GetByIdAsync(request.Id);
 
             if (!result.IsSuccess || result.Data == null)

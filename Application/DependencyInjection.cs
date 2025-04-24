@@ -1,6 +1,7 @@
-﻿using MediatR;
+﻿using Application.Common.Behaviours;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using AutoMapper;
 
 namespace Application
 {
@@ -11,8 +12,11 @@ namespace Application
             var assembly = typeof(DependencyInjection).Assembly;
 
             services.AddMediatR(assembly);
-
             services.AddAutoMapper(assembly);
+            services.AddValidatorsFromAssembly(assembly);
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 
             return services;
         }

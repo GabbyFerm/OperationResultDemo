@@ -1,3 +1,4 @@
+using Api.Middleware;
 using Application;
 using Infrastructure;
 
@@ -30,6 +31,9 @@ namespace API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            // Global error handler middleware: logs and returns safe OperationResult error response (to catch unhandled exceptions)
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.UseHttpsRedirection();
 

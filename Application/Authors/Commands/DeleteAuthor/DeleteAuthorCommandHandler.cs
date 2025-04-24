@@ -3,7 +3,7 @@ using Application.Interfaces;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Authors.Commands
+namespace Application.Authors.Commands.DeleteAuthor
 {
     public class DeleteAuthorCommandHandler : IRequestHandler<DeleteAuthorCommand, OperationResult<bool>>
     {

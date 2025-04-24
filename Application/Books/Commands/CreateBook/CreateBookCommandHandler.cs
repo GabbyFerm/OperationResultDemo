@@ -5,7 +5,7 @@ using AutoMapper;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Books.Commands
+namespace Application.Books.Commands.CreateBook
 {
     public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand, OperationResult<BookDto>>
     {
