@@ -22,6 +22,16 @@ namespace Infrastructure.Repositories
             return OperationResult<IEnumerable<T>>.Success(list);
         }
 
+        //// Raw sql to compare time between link and raw SQL
+        //public async Task<OperationResult<IEnumerable<T>>> GetAllAsync()
+        //{
+        //    var list = await _dbSet
+        //        .FromSqlRaw($"SELECT * FROM [{typeof(T).Name}s]")
+        //        .ToListAsync();
+
+        //    return OperationResult<IEnumerable<T>>.Success(list);
+        //}
+
         public async Task<OperationResult<T?>> GetByIdAsync(int id)
         {
             var entity = await _dbSet.FindAsync(id);
