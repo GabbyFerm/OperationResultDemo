@@ -5,7 +5,7 @@ using AutoMapper;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Books.Queries
+namespace Application.Books.Queries.GetAllBooks
 {
     public class GetAllBooksQueryHandler : IRequestHandler<GetAllBooksQuery, OperationResult<IEnumerable<BookDto>>>
     {

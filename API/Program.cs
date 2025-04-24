@@ -1,10 +1,6 @@
+using Api.Middleware;
 using Application;
-using Application.Interfaces;
 using Infrastructure;
-using Infrastructure.Database;
-using Infrastructure.Repositories;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace API
 {
@@ -35,6 +31,9 @@ namespace API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            // Global error handler middleware: logs and returns safe OperationResult error response (to catch unhandled exceptions)
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.UseHttpsRedirection();
 

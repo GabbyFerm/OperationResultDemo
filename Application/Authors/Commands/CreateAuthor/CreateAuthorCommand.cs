@@ -2,7 +2,7 @@
 using Application.DTOs;
 using MediatR;
 
-namespace Application.Authors.Commands
+namespace Application.Authors.Commands.CreateAuthor
 {
     public class CreateAuthorCommand : IRequest<OperationResult<AuthorDto>>
     {

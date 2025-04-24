@@ -5,7 +5,7 @@ using AutoMapper;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Books.Commands
+namespace Application.Books.Commands.UpdateBook
 {
     public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand, OperationResult<BookDto>>
     {

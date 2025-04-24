@@ -5,7 +5,7 @@ using AutoMapper;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Authors.Queries
+namespace Application.Authors.Queries.GetAuthorById
 {
     public class GetAuthorByIdQueryHandler : IRequestHandler<GetAuthorByIdQuery, OperationResult<AuthorDto>>
     {

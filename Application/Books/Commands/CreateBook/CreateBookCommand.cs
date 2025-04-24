@@ -2,11 +2,10 @@
 using Application.DTOs;
 using MediatR;
 
-namespace Application.Books.Commands
+namespace Application.Books.Commands.CreateBook
 {
-    public class UpdateBookCommand : IRequest<OperationResult<BookDto>>
+    public class CreateBookCommand : IRequest<OperationResult<BookDto>>
     {
-        public int Id { get; set; }
         public string Title { get; set; } = null!;
         public int AuthorId { get; set; }
     }

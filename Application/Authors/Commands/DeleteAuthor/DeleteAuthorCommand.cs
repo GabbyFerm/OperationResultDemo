@@ -1,7 +1,7 @@
 ﻿using Application.Common;
 using MediatR;
 
-namespace Application.Authors.Commands
+namespace Application.Authors.Commands.DeleteAuthor
 {
     public class DeleteAuthorCommand : IRequest<OperationResult<bool>>
     {

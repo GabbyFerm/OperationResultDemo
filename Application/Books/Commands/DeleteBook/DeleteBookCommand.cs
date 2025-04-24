@@ -1,7 +1,7 @@
 ﻿using Application.Common;
 using MediatR;
 
-namespace Application.Books.Commands
+namespace Application.Books.Commands.DeleteBook
 {
     public class DeleteBookCommand : IRequest<OperationResult<bool>>
     {

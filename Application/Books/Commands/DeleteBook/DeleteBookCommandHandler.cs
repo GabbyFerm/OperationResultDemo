@@ -3,7 +3,7 @@ using Application.Interfaces;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Books.Commands
+namespace Application.Books.Commands.DeleteBook
 {
     public class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand, OperationResult<bool>>
     {

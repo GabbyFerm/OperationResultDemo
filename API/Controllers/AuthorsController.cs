@@ -1,8 +1,10 @@
-﻿using Application.Authors.Commands;
-using Application.Authors.Queries;
+﻿using Application.Authors.Commands.CreateAuthor;
+using Application.Authors.Commands.DeleteAuthor;
+using Application.Authors.Commands.UpdateAuthor;
+using Application.Authors.Queries.GetAllAuthors;
+using Application.Authors.Queries.GetAuthorById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace API.Controllers
 {
