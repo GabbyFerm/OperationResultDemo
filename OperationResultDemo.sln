@@ -13,9 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenchmarkTests", "BenchmarkTests\BenchmarkTests.csproj", "{AE6AF0B5-F6F8-4029-93F2-F172DECD906F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostmanCollections", "PostmanCollections", "{524DF1A7-2749-4171-987E-34A374ED93AE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostmanCollections", "PostmanCollections", "{E907943E-EEA3-4D42-B0CA-2C908D35C8D2}"
 	ProjectSection(SolutionItems) = preProject
-		..\PostmanCollection\OperationResultDemo API.postman_collection.json = ..\PostmanCollection\OperationResultDemo API.postman_collection.json
+		PostmanCollection\OperationResultDemo_API.postman_collection.json.json = PostmanCollection\OperationResultDemo_API.postman_collection.json.json
 	EndProjectSection
 EndProject
 Global
