@@ -42,7 +42,7 @@ namespace API.Controllers
                 : BadRequest(result);
         }
 
-    [HttpPut("{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAuthor(int id, [FromBody] UpdateAuthorCommand command)
         {
             command.Id = id;
