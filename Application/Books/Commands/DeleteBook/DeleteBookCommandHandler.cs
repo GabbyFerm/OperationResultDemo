@@ -16,12 +16,15 @@ namespace Application.Books.Commands.DeleteBook
 
         public async Task<OperationResult<bool>> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
         {
+            // Try to fetch the book by ID from the database
             var existing = await _repository.GetByIdAsync(request.Id);
+
+            // If the book doesn't exist or an error occurred, return a failure
             if (!existing.IsSuccess || existing.Data == null)
                 return OperationResult<bool>.Failure(existing.ErrorMessage ?? "Book not found");
 
+            // Delete the found book and return the result
             return await _repository.DeleteAsync(existing.Data);
         }
     }
-
 }

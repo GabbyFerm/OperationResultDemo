@@ -23,23 +23,33 @@ namespace API.Controllers
         public async Task<IActionResult> GetAllBooks()
         {
             var result = await _mediator.Send(new GetAllBooksQuery());
-            return result.IsSuccess ? Ok(result) : NotFound(result);
+
+            if (!result.IsSuccess)
+                return NotFound(result);
+
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBookById(int id)
         {
             var result = await _mediator.Send(new GetBookByIdQuery(id));
-            return result.IsSuccess ? Ok(result) : NotFound(result);
+
+            if (!result.IsSuccess)
+                return NotFound(result);
+
+            return Ok(result);
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateBook([FromBody] CreateBookCommand command)
         {
             var result = await _mediator.Send(command);
-            return result.IsSuccess
-                ? CreatedAtAction(nameof(GetBookById), new { id = result.Data!.Id }, result)
-                : BadRequest(result);
+
+            if (!result.IsSuccess)
+                return BadRequest(result);
+
+            return CreatedAtAction(nameof(GetBookById), new { id = result.Data!.Id }, result);
         }
 
         [HttpPut("{id}")]
@@ -47,14 +57,22 @@ namespace API.Controllers
         {
             command.Id = id;
             var result = await _mediator.Send(command);
-            return result.IsSuccess ? Ok(result) : NotFound(result);
+
+            if (!result.IsSuccess)
+                return NotFound(result);
+
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBook(int id)
         {
             var result = await _mediator.Send(new DeleteBookCommand(id));
-            return result.IsSuccess ? Ok(result) : NotFound(result);
+
+            if (!result.IsSuccess)
+                return NotFound(result);
+
+            return Ok(result);
         }
     }
 }

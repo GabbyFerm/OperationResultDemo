@@ -12,14 +12,15 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            // Register the application's DbContext and connect it to SQL Server
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            // Register your repositories
+            // Register repositories
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUserRepository, UserRepository>();
 
-            // Register JWT service
+            // Register JWT generator service
             services.AddScoped<IJwtGenerator, JwtGenerator>();
 
             return services;

@@ -20,16 +20,22 @@ namespace Application.Authors.Commands.UpdateAuthor
 
         public async Task<OperationResult<AuthorDto>> Handle(UpdateAuthorCommand request, CancellationToken cancellationToken)
         {
+            // Try to find the existing author by ID
             var existing = await _repository.GetByIdAsync(request.Id);
+
+            // If the author is not found, return a failure result
             if (!existing.IsSuccess || existing.Data == null)
                 return OperationResult<AuthorDto>.Failure(existing.ErrorMessage ?? "Author not found");
 
+            // Update the author with the new name
             var author = existing.Data;
             author.Name = request.Name;
 
+            // Save the changes
             var updated = await _repository.UpdateAsync(author);
+
+            // Map the updated entity back to a DTO and return success
             return OperationResult<AuthorDto>.Success(_mapper.Map<AuthorDto>(updated.Data));
         }
     }
-
 }

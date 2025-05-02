@@ -26,7 +26,7 @@ namespace Application.Common.Mappings
             CreateMap<UpdateAuthorCommand, Author>();
             CreateMap<DeleteAuthorCommand, Author>();
 
-            // suer mapping (safe with no password)
+            // User mapping (safe with no password)
             CreateMap<User, UserDto>();
         }
     }
