@@ -13,20 +13,20 @@ namespace API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.  
-            builder.Services.AddControllers(); // Add support for [ApiController]s  
-            builder.Services.AddEndpointsApiExplorer(); // Required for Swagger to discover endpoints  
+            builder.Services.AddControllers();   
+            builder.Services.AddEndpointsApiExplorer(); // Enables Swagger to discover endpoints 
 
             // Register Clean Architecture Dependency Injection  
-            builder.Services.AddApplication();
-            builder.Services.AddInfrastructure(builder.Configuration);
+            builder.Services.AddApplication(); // Application layer services
+            builder.Services.AddInfrastructure(builder.Configuration); // Infrastructure services
 
-            // Add Swagger + JWT Authorization UI  
+            // Add Swagger with JWT Authorization support  
             builder.Services.AddJwtAuthentication(builder.Configuration);
             builder.Services.AddSwaggerWithJwt();
 
             var app = builder.Build();
 
-            // Seed admin user on startup  
+            // Seed admin user on startup (only if it doesn't exist)  
             DataSeeder.SeedAdminUser(app);
 
             // Configure Middleware Pipeline  
@@ -36,15 +36,13 @@ namespace API
                 app.UseSwaggerUI();
             }
 
-            // Custom middleware for consistent error responses: It catches unhandled exeptions, unexpected crashes 
-            // - UnauthorizedHandlingMiddleware: Converts 401/403 responses (from [Authorize]) into OperationResult JSON
-            // - ExceptionHandlingMiddleware: Catches unhandled exceptions and logs + returns a safe OperationResult error
-            app.UseMiddleware<UnauthorizedHandlingMiddleware>(); // Handles unauthenticated or unauthorized access
-            app.UseMiddleware<ExceptionHandlingMiddleware>();    // Handles unexpected server-side exceptions
+            // Custom middleware for consistent error responses: 
+            app.UseMiddleware<UnauthorizedHandlingMiddleware>(); // Handles unauthenticated/unauthorized access
+            app.UseMiddleware<ExceptionHandlingMiddleware>();    // Handles unexpected runtime exceptions
 
             app.UseHttpsRedirection();
 
-            // Order matters: Authentication before Authorization  
+            // Authentication must come before Authorization    
             app.UseAuthentication();
             app.UseAuthorization();
 

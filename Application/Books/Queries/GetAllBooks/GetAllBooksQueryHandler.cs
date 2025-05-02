@@ -20,15 +20,18 @@ namespace Application.Books.Queries.GetAllBooks
 
         public async Task<OperationResult<IEnumerable<BookDto>>> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
         {
+            // Retrieve all books from repository
             var result = await _repository.GetAllAsync();
 
+            // Return failure if fetching failed
             if (!result.IsSuccess)
                 return OperationResult<IEnumerable<BookDto>>.Failure(result.ErrorMessage!);
 
+            // Map Book entities to DTOs
             var dtoList = _mapper.Map<IEnumerable<BookDto>>(result.Data);
+
+            // Return success with list of DTOs
             return OperationResult<IEnumerable<BookDto>>.Success(dtoList);
         }
     }
-
-
 }

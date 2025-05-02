@@ -9,14 +9,15 @@ namespace Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            var assembly = typeof(DependencyInjection).Assembly;
+            var assembly = typeof(DependencyInjection).Assembly; // Get current assembly (Application layer)
 
-            services.AddMediatR(assembly);
-            services.AddAutoMapper(assembly);
-            services.AddValidatorsFromAssembly(assembly);
+            services.AddMediatR(assembly); // Registers all MediatR handlers (Commands/Queries)
+            services.AddAutoMapper(assembly); // Registers AutoMapper profiles
+            services.AddValidatorsFromAssembly(assembly); // Registers all FluentValidation validators
 
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+            // Register pipeline behaviors 
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>)); // Handles validation
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>)); // Handles request logging
 
             return services;
         }

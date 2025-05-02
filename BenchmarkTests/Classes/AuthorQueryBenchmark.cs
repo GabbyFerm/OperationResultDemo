@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BenchmarkTests.Classes
 {
-    [MemoryDiagnoser]
+    [MemoryDiagnoser] // Adds memory usage tracking to benchmark
     public class AuthorQueryBenchmark
     {
         private AppDbContext _context;
@@ -14,7 +14,7 @@ namespace BenchmarkTests.Classes
             _context = context;
         }
 
-        [GlobalSetup]
+        [GlobalSetup] // Runs once before any benchmark
         public void Setup()
         {
             var options = new DbContextOptionsBuilder<AppDbContext>()
@@ -24,20 +24,20 @@ namespace BenchmarkTests.Classes
             _context = new AppDbContext(options);
         }
 
-        [Benchmark]
+        [Benchmark] // Benchmark using LINQ
         public async Task GetAuthorsWithLinq()
         {
             var authors = await _context.Authors.ToListAsync();
-            var count = authors.Count(); // Force full materialization
+            _ = authors.Count; // Materialize result to ensure accurate benchmark
         }
 
-        [Benchmark]
+        [Benchmark] // Benchmark using raw SQL
         public async Task GetAuthorsWithRawSql()
         {
             var authors = await _context.Authors
                 .FromSqlRaw("SELECT * FROM Authors")
                 .ToListAsync();
-            var count = authors.Count(); // Force full materialization
+            _ = authors.Count; // Force full materialization
         }
     }
 }

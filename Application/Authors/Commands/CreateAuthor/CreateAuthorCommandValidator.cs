@@ -11,5 +11,4 @@ namespace Application.Authors.Commands.CreateAuthor
                 .MaximumLength(100).WithMessage("Author name must be less than 100 characters");
         }
     }
-
 }

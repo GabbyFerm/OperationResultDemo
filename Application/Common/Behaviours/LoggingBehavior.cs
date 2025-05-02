@@ -14,27 +14,32 @@ namespace Application.Common.Behaviours
             _logger = logger;
         }
 
+        // This method is called for every request passing through the MediatR pipeline
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             var requestName = typeof(TRequest).Name;
-            var stopwatch = Stopwatch.StartNew();
+            var stopwatch = Stopwatch.StartNew(); // Start timer to measure execution time
 
+            // Log request start and its payload
             _logger.LogInformation("Handling request: {RequestName} | Payload: {@Request}", requestName, request);
 
             try
             {
-                var response = await next();
-                stopwatch.Stop();
+                var response = await next(); // Call the next behavior/handler in the pipeline
+                stopwatch.Stop(); // Stop timer after response is returned
 
+                // Log success and how long it took
                 _logger.LogInformation("Handled {RequestName} in {ElapsedMilliseconds}ms", requestName, stopwatch.ElapsedMilliseconds);
 
                 return response;
             }
             catch (Exception ex) 
             { 
-                stopwatch.Stop();
+                stopwatch.Stop(); // Stop timer on failure
+
+                // Log the exception and how long it took before the error
                 _logger.LogError(ex, "Unhandled exception for request {RequestName} after {ElapsedMilliseconds}ms", requestName, stopwatch.ElapsedMilliseconds);
-                throw;
+                throw; // Re-throw so global middleware can handle it
             }
         }
     }
