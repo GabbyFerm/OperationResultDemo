@@ -9,6 +9,11 @@ namespace BenchmarkTests.Classes
     {
         private AppDbContext _context;
 
+        public AuthorQueryBenchmark(AppDbContext context)
+        {
+            _context = context;
+        }
+
         [GlobalSetup]
         public void Setup()
         {

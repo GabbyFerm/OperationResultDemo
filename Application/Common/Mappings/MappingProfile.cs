@@ -14,15 +14,20 @@ namespace Application.Common.Mappings
     {
         public MappingProfile()
         {
+            // Book mappings
             CreateMap<Book, BookDto>().ReverseMap();           
             CreateMap<CreateBookCommand, Book>();
             CreateMap<UpdateBookCommand, Book>();
             CreateMap<DeleteBookCommand, Book>();
 
+            // Author mappings
             CreateMap<Author, AuthorDto>().ReverseMap();
             CreateMap<CreateAuthorCommand, Author>();
             CreateMap<UpdateAuthorCommand, Author>();
             CreateMap<DeleteAuthorCommand, Author>();
+
+            // suer mapping (safe with no password)
+            CreateMap<User, UserDto>();
         }
     }
 }
